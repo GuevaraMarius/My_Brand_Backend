@@ -4,7 +4,6 @@ import Post from "../postModels.js";
          const createdPost= await Post.create({
              title: req.body.title,
              description:req.body.description,
-             imageUrl:req.body.imageUrl,
              like:req.body.like,
              comment:req.body.comment,
              posted:req.body.posted
@@ -43,7 +42,6 @@ export const deletePost = async (req,res)=>{
         const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
         res.status(200).json({
             success:"true",
-            post: deletePost,
         });
     } catch (error) {
         res.status(500).json({
@@ -63,7 +61,6 @@ export const updatePost = async (req,res)=>{
         );
         res.status(200).json({
             success:"true ",
-            post: updatePost,
             
         });
     } catch (error) {

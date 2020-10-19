@@ -5,8 +5,8 @@ import {
 }from "../controllers/posts.js"
 
 const router = express.Router();
-router.post("/addPost",post);
-router.get("/findPosts",find);
-router.delete("/deletePost/:postId",deletePost);
-router.patch("/updatePost/:postId", updatePost);
+router.post("/articles",post);
+router.get("/articles",find);
+router.delete("/articles/:postId",deletePost);
+router.patch("/articles/:postId", updatePost);
 export default router;
