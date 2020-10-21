@@ -1,4 +1,4 @@
-import Post from "../postModels.js";
+import Post from "../models/postModels.js";
  export const post= async (req,res) => {
      try{
          const createdPost= await Post.create({
@@ -6,11 +6,10 @@ import Post from "../postModels.js";
              description:req.body.description,
              like:req.body.like,
              comment:req.body.comment,
-             posted:req.body.posted
+             posted:Date.now(),
          });
          res.status(201).json({
             success: true,
-            user: createdPost,
           });
      }
      catch (error) {
@@ -42,6 +41,7 @@ export const deletePost = async (req,res)=>{
         const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
         res.status(200).json({
             success:"true",
+          
         });
     } catch (error) {
         res.status(500).json({
@@ -61,6 +61,7 @@ export const updatePost = async (req,res)=>{
         );
         res.status(200).json({
             success:"true ",
+
             
         });
     } catch (error) {
