@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
-
-
-
 const postSchema=mongoose.Schema({
-    posted:{type: Date ,required:true},
+    posted:{type:Date},
     title:{type:String,required:true, unique: true },
     description:{type:String,required:true,unique: true },
     like:{type:Number},
