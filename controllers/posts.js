@@ -8,6 +8,13 @@ import Post from "../models/postModels.js";
              comment:req.body.comment,
              posted:Date.now(),
          });
+         createdPost.save((err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(newArticle);
+            }
+        })
          res.status(201).json({
             success: true,
           });

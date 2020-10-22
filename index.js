@@ -1,6 +1,7 @@
 import express from "express"; 
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from 'cors';
 import userRouter from './routes/userRouter.js'
 import   "./configs/database.js"
 import bodyParser from "body-parser";
@@ -19,6 +20,7 @@ console.error('connection error:', err)
 const server = express();
 server.set('view engine', 'ejs')
 server.use(express.json())
+server.use(cors());
 server.use(postRoutes)
 server.use('/user',userRouter)
 
