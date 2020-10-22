@@ -26,10 +26,7 @@ server.use(cors({
     "preflightContinue": false,
     "optionsSuccessStatus": 204
   } ));
-server.use(postRoutes)
-server.use('/user',userRouter)
-
-server.use((req, res, next) => {
+  server.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
     if (req.method === "OPTIONS") {
@@ -38,6 +35,10 @@ server.use((req, res, next) => {
     }
     next();
   });
+server.use(postRoutes)
+server.use('/user',userRouter)
+
+
 
 
 server.listen(process.env.PORT,
