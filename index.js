@@ -8,9 +8,9 @@ dotenv.config();
 import postRoutes from "./routes/posts.js";
 const url =process.env.DATABASE_URL
 mongoose.connect(url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true})
-export const db=mongoose.connection
+const db=mongoose.connection
 db.once('open', _ => {
-console.log('Database connected:', 'mongodb://localhost:27017/mybrand')
+console.log('Database connected:', url)
 })
 db.on('error', err => {
 console.error('connection error:', err)
