@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/e0ab0bdcee.js" crossorigin="anonymous"></script>
+    <title>Admin</title>
+</head>
+<body>
+    <header>
+       
+        <div class="nav">
+            
+            <div class="nav_menu">
+                
+                <ul>
+                    <li><i class="fas fa-user"></i><a href="./Profile/create.html"><br>PROFILE</a> </li>
+                    <li><i class="fas fa-blog"></i><a href="./index.html"><br>POSTS</a> </li>
+                <li><i class="fas fa-comments"></i><a href="./messages/messages.html"><br>MESSAGES</a></li>  
+                <li><i class="fas fa-user-friends"></i><a href="./messages/messages.html"><br>USERS</a></li>  
+                <li><i class="fas fa-sign-out-alt"></i><a href="#"><br>LOGOUT</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="norifications"></div>
+    </header>
+    <main>
+        <div class="admin-wrapper">
+            <div class="admin-content">
+<div class="button-group">
+    <a href="/admin"  class="button"id="others">Add Post</a>
+    <a href="/posts" class="button"id="others">Manage Post</a>
+
+</div>
+<div class="content">
+<h2 class="page-title">Manage Posts</h2>
+
+
+<form action="/articles" id="addArticle" method="POST">
+    <div class="content">
+        <h2 class="page-title">Add Post</h2>
+        
+            <label>Title</label><br>
+            <input type="text" class="text-input" name="title" class="text-input">
+        </div>
+        <div>
+        <label>Body</label><br>
+            <textarea name="description" id="body"class="text-input" ></textarea>
+        </div>
+        <div>  
+        <label>Image</label><br>
+        <input type="file" class="text-input" name="image" class="text-input">
+        </div>
+        <div>
+            <button type="submit" class="button" id="others"> <a href="" >Add post</a></button>
+        </div>
+        </div>
+</form>
+<script>  
+    let form = document.getElementById('addArticle');
+      form.addEventListener('submit' , function (e){
+        e.preventDefault();
+        let data = {
+          title : form.title.value,
+          description : form.description.value
+        };
+        fetch('https://guevarabrand.herokuapp.com/articles', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data)
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      });
+</script>
+
+
+</div>
+            </div> 
+        </div>
+    </main>
+</body>
+</html>
