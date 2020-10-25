@@ -45,17 +45,17 @@ try {
 
 };
 
-export const getOnePost=async (req,res)=>{
-    try {
-        const onePost = await Post.findOne({ _id:req.params.postId});
-        return successHandler(res, 200, 'post got successfully', onePost);
-    } 
-    catch (error) {
-        console.log(error);
-    return errorRes(res, 404, 'not found on posts list', error);
-    }
-}
-
+const getOnePost=get('/:articleID' , (req,res) => {
+    getOnePost.findOne({_id: req.params.articleID} , (err,article) =>{
+        if(err){
+            console.log(err);
+        }else if (!article){
+            res.send({message :"No such article"});
+        }else{
+            res.send(article);
+        }
+    })
+});
 export const deletePost = async (req,res)=>{
     try {
         const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
