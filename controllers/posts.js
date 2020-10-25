@@ -47,7 +47,7 @@ try {
 
 export const getOnePost=async (req,res)=>{
     try {
-        const onePost = await Post.findById(req.params.id);
+        const onePost = await Post.findById({ _id:req.params.postId});
         await onePost.save();
         return successHandler(res, 200, 'post got successfully', onePost);
     } 
