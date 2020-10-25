@@ -70,7 +70,7 @@ export const deletePost = async (req,res)=>{
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "failed to delete user",
+            message: "failed to delete post",
           });
     }
 }
