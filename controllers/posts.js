@@ -47,8 +47,12 @@ try {
 
 export const getOnePost=async (req,res)=>{
     try {
-        const onePost = await Post.findOne({ _id:req.params.postId});
-        return successHandler(res, 200, 'post got successfully', onePost);
+        const id=req.params.id;
+        const onePost = await Post.findOne(id);
+        res.status(200).json({
+            success:"true",
+            onePost:onePost
+        });
     } 
     catch (error) {
         console.log(error);
