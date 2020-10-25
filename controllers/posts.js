@@ -44,7 +44,7 @@ try {
 }
 
 };
-
+//get one post
 export const getOnePost=async (req,res)=>{
     try {
         const id=req.params.id;
@@ -62,7 +62,8 @@ export const getOnePost=async (req,res)=>{
 
 export const deletePost = async (req,res)=>{
     try {
-        const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
+        const id=req.params.id;
+        const deletePost = await Post.findOneAndDelete(id); 
         res.status(200).json({
             success:"true",
           
