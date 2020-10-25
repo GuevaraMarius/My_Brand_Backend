@@ -27,6 +27,7 @@ import Post from "../models/postModels.js";
         });
       }
  }
+ // get all posts
 export const find =async(req,res)=>{
 try {
     const posts= await Post.find();
@@ -43,6 +44,19 @@ try {
 }
 
 };
+
+export const getOnePost=async (req,res)=>{
+    try {
+        const onePost = await Post.findById(req.params.id);
+        await onePost.save();
+        return successHandler(res, 200, 'post got successfully', onePost);
+    } 
+    catch (error) {
+        console.log(error);
+    return errorRes(res, 404, 'not found on posts list', error);
+    }
+}
+
 export const deletePost = async (req,res)=>{
     try {
         const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
