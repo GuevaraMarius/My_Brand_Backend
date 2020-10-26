@@ -21,12 +21,6 @@ const server = express();
 server.use(express.urlencoded({extended:true}))
 server.set('view engine', 'ejs')
 server.use(express.json())
-server.use(cors({
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204,
-  } ));
   server.use(cors());
   server.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
