@@ -62,7 +62,7 @@ export const getOnePost=async (req,res)=>{
 
 export const deletePost = async (req,res)=>{
     try {
-        const deletePost = await Post.findOne({ _id: req.params.id }); 
+        const deletePost = await Post.findOne({ _id: req.params.postId }); 
         await deletePost.deleteOne();
         res.status(200).json({
             success:"true",
