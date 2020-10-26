@@ -12,7 +12,7 @@ import Post from "../models/postModels.js";
             if (err) {
                 console.log(err);
             } else {
-                res.send(newArticle);
+                res.send(createdPost);
             }
         })
          res.status(201).json({
