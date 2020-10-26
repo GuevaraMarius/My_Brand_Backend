@@ -19,7 +19,6 @@ console.error('connection error:', err)
 
 const server = express();
 server.use(express.urlencoded({extended:true}))
-server.set('view engine', 'ejs')
 server.use(express.json())
 server.use(cors());
 server.use((req,res,next) => {
