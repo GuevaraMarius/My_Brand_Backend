@@ -7,7 +7,7 @@ import {
 const router = express.Router();
 router.post("/articles",post);
 router.get("/articles",find);
-router.get("/articles/:postId",getOnePost);
+router.get("/articles/getOnePost/:postId",getOnePost);
 router.delete("/articles/delete/:postId",deletePost);
 router.patch("/articles/update/:postId", updatePost);
 export default router;
