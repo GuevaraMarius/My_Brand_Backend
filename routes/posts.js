@@ -9,5 +9,5 @@ router.post("/articles",post);
 router.get("/articles",find);
 router.get("/articles/:postId",getOnePost);
 router.delete("/articles/delete/:postId",deletePost);
-router.patch("/articles/:postId", updatePost);
+router.patch("/articles/update/:postId", updatePost);
 export default router;
