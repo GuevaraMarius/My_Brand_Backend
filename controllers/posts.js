@@ -12,12 +12,13 @@ import Post from "../models/postModels.js";
             if (err) {
                 console.log(err);
             } else {
-                res.send(createdPost);
+                res.status(201).json({
+                    success: true,
+                  });
             }
         })
-         res.status(201).json({
-            success: true,
-          });
+         
+        
      }
      catch (error) {
         console.log(error);
