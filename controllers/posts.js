@@ -21,7 +21,7 @@ import Post from "../models/postModels.js";
      }
      catch (error) {
         console.log(error);
-        res.status(500).json({
+       return res.status(500).json({
           success: false,
           message: "failed to create a post",
         });
