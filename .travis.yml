@@ -9,12 +9,6 @@ script:
   - npm ci
   - npm test:coveralls
   - npm run cover
-  deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  on:
-  branch: master
  notifications:
    email: false
 after_success:
