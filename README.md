@@ -1,2 +1,1 @@
-[![Build Status](https://travis-ci.org/GuevaraMarius/My_Brand_Backend.svg?branch=master)](https://travis-ci.org/GuevaraMarius/My_Brand_Backend)
-[![Coverage Status](https://coveralls.io/repos/github/GuevaraMarius/My_Brand_Backend/badge.svg?branch=master)](https://coveralls.io/github/GuevaraMarius/My_Brand_Backend?branch=master)
+
