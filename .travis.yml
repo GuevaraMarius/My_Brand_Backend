@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - v12.19.0
+env:
+  - PORT=5000
+services:
+  - mongodb
+script:
+  - npm ci
+  - npm test:coveralls
+  - npm run cover
+ notifications:
+   email: false
+after_success:
+  - npm run coveralls
