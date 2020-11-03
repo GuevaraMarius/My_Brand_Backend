@@ -18,23 +18,15 @@ console.error('connection error:', err)
 })
 
 const server = express();
-server.set('view engine', 'ejs')
+server.use(express.urlencoded({extended:true}))
 server.use(express.json())
-server.use(cors({
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
-  } ));
-  server.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "*");
-    if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
-    }
-    next();
-  });
+server.use(cors());
+server.use((req,res,next) => {
+  res.header('Access-Control-Allow-Origin' , '*');
+  res.header('Access-Control-Allow-Methods' , 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers' , 'Content-Type');
+  next();
+});
 server.use(postRoutes)
 server.use('/user',userRouter)
 

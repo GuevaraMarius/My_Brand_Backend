@@ -8,25 +8,28 @@ import Post from "../models/postModels.js";
              comment:req.body.comment,
              posted:Date.now(),
          });
-         createdPost.save((err) => {
+         createdPost.save((err,result) => {
             if (err) {
                 console.log(err);
             } else {
-                res.send(newArticle);
+                res.status(201).json({
+                    success: true,
+                    result
+                  });
             }
         })
-         res.status(201).json({
-            success: true,
-          });
+         
+        
      }
      catch (error) {
         console.log(error);
-        res.status(500).json({
+       return res.status(500).json({
           success: false,
           message: "failed to create a post",
         });
       }
  }
+ // get all posts
 export const find =async(req,res)=>{
 try {
     const posts= await Post.find();
@@ -43,9 +46,26 @@ try {
 }
 
 };
+//get one post
+export const getOnePost=async (req,res)=>{
+    try {
+        
+        const onePost = await Post.findOne( {_id:req.params.postId});
+        res.status(200).json({
+            success:"true",
+            onePost:onePost
+        });
+    } 
+    catch (error) {
+        console.log(error);
+    return errorRes(res, 404, 'not found on posts list', error);
+    }
+}
+
 export const deletePost = async (req,res)=>{
     try {
-        const deletePost = await Post.findOneAndDelete({ _id:req.params.postId}); 
+        const deletePost = await Post.findOne({ _id: req.params.postId }); 
+        await deletePost.deleteOne();
         res.status(200).json({
             success:"true",
           
@@ -53,7 +73,7 @@ export const deletePost = async (req,res)=>{
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "failed to delete user",
+            message: "failed to delete post",
           });
     }
 }

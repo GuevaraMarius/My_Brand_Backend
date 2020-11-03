@@ -1,12 +1,13 @@
 import express from "express";
 import {
-    post ,find,deletePost,updatePost,
+    post ,find,deletePost,updatePost,getOnePost
 
 }from "../controllers/posts.js"
 
 const router = express.Router();
 router.post("/articles",post);
 router.get("/articles",find);
-router.delete("/articles/:postId",deletePost);
-router.patch("/articles/:postId", updatePost);
+router.get("/articles/getOnePost/:postId",getOnePost);
+router.delete("/articles/delete/:postId",deletePost);
+router.patch("/articles/update/:postId", updatePost);
 export default router;
