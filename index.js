@@ -8,7 +8,7 @@ import bodyParser from "body-parser";
 dotenv.config();
 import postRoutes from "./routes/posts.js";
 const url =process.env.DATABASE_URL
-mongoose.connect(url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true})
+mongoose.connect(url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true,useFindAndModify: false})
 const db=mongoose.connection
 db.once('open', _ => {
 console.log('Database connected:', url)
@@ -30,8 +30,6 @@ server.use((req,res,next) => {
 server.use(postRoutes)
 server.use('/user',userRouter)
 
-
-
-
-server.listen(process.env.PORT,
+ server.listen(process.env.PORT,
     console.log(`server is running on port  ${process.env.PORT}`));
+    export default server
