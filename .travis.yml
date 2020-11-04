@@ -1,7 +1,5 @@
 after_success: 
   - "test $TRAVIS_PULL_REQUEST = false && git push"
-before_script: 
-  - "bower install"
 branches: 
   only: 
     - master
