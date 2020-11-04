@@ -1,5 +1,9 @@
 after_success: 
   - "test $TRAVIS_PULL_REQUEST = false && git push"
+before_script: 
+  - "npm run test"
+  - "npm run coveralls"
+  - "npm run cover"
 branches: 
   only: 
     - master
@@ -8,7 +12,7 @@ env:
   - PORT=4000
 language: node_js
 node_js: 
-  - "0.10"
+  - "12.19.0"
   - stable
 services: 
   - mongodb
