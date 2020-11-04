@@ -5,8 +5,23 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 60000",
+    "test": "mocha ./test/test.js --timeout 60000",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm run test",
+    "cover": "nyc --reporter=text npm run test",
     "start": "node index.js"
+  },
+  "nyc": {
+    "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using Istanbul",
+    "include": [
+      "**/*.js",
+      "./*.js"
+    ],
+    "exclude": [
+      "**/configs/**",
+      "**/node_modules/**",
+      "**/coverage/**"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
@@ -30,8 +45,10 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "istanbul": "^0.4.5",
     "mocha": "^8.2.0",
     "nodemon": "^2.0.5",
+    "nyc": "^15.1.0",
     "should": "^13.2.3",
     "supertest": "^6.0.0"
   }

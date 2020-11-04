@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - v12.19.0
+  - "stable"
 env:
   - PORT=5000
 services:
@@ -9,12 +9,6 @@ script:
   - npm ci
   - npm test:coveralls
   - npm run cover
-  deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  on:
-  branch: master
  notifications:
    email: false
 after_success:
