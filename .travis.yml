@@ -1,15 +1,17 @@
+after_success: 
+  - "test $TRAVIS_PULL_REQUEST = false && git push"
+before_script: 
+  - "bower install"
+branches: 
+  only: 
+    - master
+    - /^deploy-.*$/
+env: 
+  global: 
+    - PORT=5000
 language: node_js
-node_js:
-  - 'stable'
-env:
-  - PORT=5003
-services:
+node_js: 
+  - "0.10"
+  - stable
+services: 
   - mongodb
-script:
-  - npm ci
-  - npm test:coveralls
-  - npm run cover
- notifications:
-   email: false
-after_success:
-  - npm run coveralls
