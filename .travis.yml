@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - "stable"
+  - 'stable'
 env:
-  - PORT=5000
+  - PORT=5003
 services:
   - mongodb
 script:
