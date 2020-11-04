@@ -26,7 +26,7 @@ let id;
             })
         })
         it("should create an article ",(done)=>{
-            const article={"title":"Hello ","description":" Hello Welt"}
+            const article={"title":"go ","description":" Check"}
             chai.request(server)
             .post("/articles")
             .send(article)
@@ -50,15 +50,15 @@ let id;
             })
         })
        
-        it("should delete an article ",(done)=>{
-            chai.request(server)
-            .delete(`/articles/delete/${id}`)
-            .end((err,response)=>{
-                 if(err) done(err);
-                response.should.have.status(200);
-                response.body.should.have.property('success');
-                 done();
-            })
-        })     
+        // it("should delete an article ",(done)=>{
+        //     chai.request(server)
+        //     .delete(`/articles/delete/${id}`)
+        //     .end((err,response)=>{
+        //          if(err) done(err);
+        //         response.should.have.status(200);
+        //         response.body.should.have.property('success');
+        //          done();
+        //     })
+        // })     
  })
  
