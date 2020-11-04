@@ -8,7 +8,8 @@
     "test": "mocha ./test/test.js --timeout 60000",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm run test",
     "cover": "nyc --reporter=text npm run test",
-    "start": "node index.js"
+    "start": "node index.js",
+    "coveralls": "nyc report --reporter=lcov --reporter=text-summary  | coveralls"
   },
   "nyc": {
     "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using Istanbul",
@@ -36,6 +37,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "coveralls": "^3.1.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
