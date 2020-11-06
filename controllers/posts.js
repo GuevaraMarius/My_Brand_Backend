@@ -32,7 +32,15 @@ import Post from "../models/postModels.js";
  // get all posts
 export const find =async(req,res)=>{
 try {
-    const posts= await Post.find();
+    const posts= await Post.find((err)=>{
+        if(err){
+            return res.status(404).json({
+                success:false,
+                message:"articles not found "
+            });
+        }
+
+    });
     res.status(200).json({
         success:true,
         posts:posts,
@@ -50,7 +58,14 @@ try {
 export const getOnePost=async (req,res)=>{
     try {
         
-        const onePost = await Post.findOne( {_id:req.params.postId});
+        const onePost = await Post.findOne( {_id:req.params.postId},(err)=>{
+            if(err){
+                return res.status(404).json({
+                    success:false,
+                    message:"the article not found "
+                });
+            }
+        });
         res.status(200).json({
             success:"true",
             onePost:onePost
@@ -58,17 +73,26 @@ export const getOnePost=async (req,res)=>{
     } 
     catch (error) {
         console.log(error);
-    return errorRes(res, 404, 'not found on posts list', error);
+   
     }
 }
 
 export const deletePost = async (req,res)=>{
     try {
         const deletePost = await Post.findOne({ _id: req.params.postId }); 
-        await deletePost.deleteOne();
-        res.status(200).json({
-            success:"true",
-          
+        await deletePost.deleteOne((err)=>{
+            if(err){
+                return res.status(404).json({
+                    success:false,
+                    message:"the article not found "
+                });
+            }
+            else{
+                res.status(201).json({
+                    success:"true ",
+                    
+                });
+            }
         });
     } catch (error) {
         res.status(500).json({
@@ -81,16 +105,23 @@ export const updatePost = async (req,res)=>{
     try {
         const updatePost = await Post.findOneAndUpdate(
             { _id: req.params.postId},
-            req.body,
-        {
-             new :true,  
-        } 
-        );
-        res.status(200).json({
-            success:"true ",
+            req.body,(err)=>{
+                if(err){
+                    return res.status(404).json({
+                        success:false,
+                        message:"the article not found "
+                    });
+                }
+                else{
+                    res.status(201).json({
+                        success:"true ",
+                        
+                    });
 
-            
-        });
+                }
+            }
+        );
+
     } catch (error) {
         res.status(500).json({
             success: false,
