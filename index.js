@@ -7,7 +7,7 @@ import   "./configs/database.js"
 import bodyParser from "body-parser";
 dotenv.config();
 import postRoutes from "./routes/posts.js";
-const url =process.env.DATABASE_URL
+const url =process.env.MONGO_URI
 mongoose.connect(url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true,useFindAndModify: false})
 const db=mongoose.connection
 db.once('open', _ => {
