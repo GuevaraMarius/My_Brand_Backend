@@ -5,15 +5,45 @@ let should = chai.should();
 chai.use(chaiHttp);
 let id;
  describe('CRUD operations',()=>{
-         it("should get all articles ",(done)=>{
-             chai.request(server)
-             .get("/articles")
-             .end((err,response)=>{
-                response.should.have.status(200);
-                response.body.should.be.a('object');
+
+    describe('create ',()=>{
+        it("should create an article ",(done)=>{
+            const article={"title":"Run  test ","description":"with travis"}
+            chai.request(server)
+            .post("/articles")
+            .send(article)
+            .end((err,response)=>{
+                console.log(response.result)
+                response.should.have.status(201);
                  done();
-             })
-         })
+            })
+        })
+        it("It should not Create an article without title or description", (done) => {
+            const article={"description":" Check"}
+            chai.request(server)
+              .post("/articles")
+              .send(article)
+              .end((error,response) => {
+                response.should.have.status(500);
+                response.body.should.have.property('success').eql(false);
+              done();
+              });
+          });
+
+
+
+    })
+     describe('Read ',()=>{
+        it("should get all articles ",(done)=>{
+            chai.request(server)
+            .get("/articles")
+            .end((err,response)=>{
+               response.should.have.status(200);
+               response.body.should.be.a('object');
+                done();
+            })
+        })
+
         it("should get one article ",(done)=>{
             const articleId='5f96e7237d53c500173c565b'
             chai.request(server)
@@ -25,40 +55,78 @@ let id;
                  done();
             })
         })
-        it("should create an article ",(done)=>{
-            const article={"title":"go ","description":" Check"}
+        it("should not get all articles with unknown route ",(done)=>{
             chai.request(server)
-            .post("/articles")
-            .send(article)
-            .end((err,response)=>{
-                
-                console.log(response.result)
-                response.should.have.status(201);
-                 done();
+            .get("/article")
+            .end((err,response)=>{    
+               response.should.have.status(404);
+                done();
             })
         })
-        it("should update an article ",(done)=>{
-            const articleId="5f96e7237d53c500173c565b"
-            const article={"title":"Hallo","description":"Hallo Welt"}
+        it("should not get an article with unknown route ",(done)=>{
             chai.request(server)
-            .patch("/articles/update/"+articleId)
-            .send(article)
+            .get("/article/getOnePost")
+            .end((err,response)=>{    
+               response.should.have.status(404);
+                done();
+            })
+        })
+
+
+     })
+         describe('update ',()=>{
+            it("should update an article ",(done)=>{
+                const articleId="5f96e7237d53c500173c565b"
+                const article={"title":"Hallo","description":"Hallo Welt"}
+                chai.request(server)
+                .patch("/articles/update/"+articleId)
+                .send(article)
+                .end((err,response)=>{
+                    response.should.have.status(201);
+                    response.body.should.have.property('success');
+                     done();
+                })
+            })
+            it("should  not update an article without ID ",(done)=>{
+                const articleId="";
+                const article={"title":"Hallo","description":"Hallo Welt"}
+                chai.request(server)
+                .patch("/articles/update/"+articleId)
+                .send(article)
+                .end((err,response)=>{
+                    response.should.have.status(404);
+                     done();
+                })
+            })
+
+         })
+         describe('delete',()=>{
+        it("should delete an article ",(done)=>{
+            const articleId="5fa57a686f49de5fa509bf404d7305ee7c8c160c593d4e36"
+            chai.request(server)
+            .delete(`/articles/delete/${articleId}`)
             .end((err,response)=>{
-                response.should.have.status(200);
+                 if(err) done(err);
+                response.should.have.status(201);
                 response.body.should.have.property('success');
                  done();
             })
-        })
+        }) 
+        it("should  not delete an article without id  ",(done)=>{
+            const articleId=""
+            chai.request(server)
+            .delete(`/articles/delete/${articleId}`)
+            .end((err,response)=>{
+                 if(err) done(err);
+                response.should.have.status(404);
+                 done();
+            })
+        })     
+
+         })
        
-        // it("should delete an article ",(done)=>{
-        //     chai.request(server)
-        //     .delete(`/articles/delete/${id}`)
-        //     .end((err,response)=>{
-        //          if(err) done(err);
-        //         response.should.have.status(200);
-        //         response.body.should.have.property('success');
-        //          done();
-        //     })
-        // })     
+        
+       
+        
  })
  
