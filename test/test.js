@@ -7,9 +7,6 @@ let should = chai.should();
 chai.use(chaiHttp);
 
  describe('CRUD operations',()=>{
-    afterEach(async () => {
-        await Post.deleteMany({});
-      });
     describe('create ',()=>{
         it("should create an article ",(done)=>{
             const article={"title":"folll","description":"Run goll test"}
