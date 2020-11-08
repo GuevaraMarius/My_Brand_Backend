@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import express from "express"; 
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -8,10 +9,12 @@ import bodyParser from "body-parser";
 dotenv.config();
 import postRoutes from "./routes/posts.js";
 const url =process.env.MONGO_URI
-mongoose.connect(url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true,useFindAndModify: false})
+const tesurl=process.env.MONGO_URI_TEST
+
+mongoose.connect(process.env.NODE_ENV === 'test' ? tesurl :url, {useCreateIndex: true,useNewUrlParser: true ,useUnifiedTopology: true,useFindAndModify: false})
 const db=mongoose.connection
 db.once('open', _ => {
-console.log('Database connected:', url)
+console.log('Database connected:')
 })
 db.on('error', err => {
 console.error('connection error:', err)

@@ -1,14 +1,19 @@
 import chai  from 'chai'
 import server from '../index.js'
 import chaiHttp from 'chai-http'
+import Post from '../models/postModels.js'
+
 let should = chai.should();
 chai.use(chaiHttp);
 let id;
  describe('CRUD operations',()=>{
 
     describe('create ',()=>{
+        beforeEach(async()=>{
+           await Post.deleteMany({});
+        })
         it("should create an article ",(done)=>{
-            const article={"title":"Run  test ","description":"with travis"}
+            const article={"title":" folll","description":"Run goll test"}
             chai.request(server)
             .post("/articles")
             .send(article)
@@ -101,15 +106,19 @@ let id;
 
          })
          describe('delete',()=>{
-        it("should delete an article ",(done)=>{
-            const articleId="5fa57a686f49de5fa509bf404d7305ee7c8c160c593d4e36"
+        it("should delete an article ",async()=>{
+            const  article= await Post.create({
+                title:"GOOAL",
+                description:"Mancity"
+            })
+            await article.save();
             chai.request(server)
-            .delete(`/articles/delete/${articleId}`)
+            .delete(`/articles/delete/${article._id}`)
             .end((err,response)=>{
                  if(err) done(err);
                 response.should.have.status(201);
                 response.body.should.have.property('success');
-                 done();
+                 
             })
         }) 
         it("should  not delete an article without id  ",(done)=>{
