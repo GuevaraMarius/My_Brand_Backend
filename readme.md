@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/GuevaraMarius/My_Brand_Backend.svg?branch=master)](https://travis-ci.org/GuevaraMarius/My_Brand_Backend)
