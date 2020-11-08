@@ -6,6 +6,7 @@ branches:
     - /^deploy-.*$/
 env: 
   - PORT=4000
+  - MONGO_URI=mongodb+srv://guevara:Guev@r@20@cluster0.hdcoi.mongodb.net/mymybrandtest?retryWrites=true&w=majority
 language: node_js
 node_js: 
   - "12.19.0"

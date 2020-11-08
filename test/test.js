@@ -1,3 +1,4 @@
+  
 import chai  from 'chai'
 import server from '../index.js'
 import chaiHttp from 'chai-http'
@@ -18,7 +19,6 @@ let id;
             .post("/articles")
             .send(article)
             .end((err,response)=>{
-                console.log(response.result)
                 response.should.have.status(201);
                  done();
             })
@@ -138,4 +138,3 @@ let id;
        
         
  })
- 
