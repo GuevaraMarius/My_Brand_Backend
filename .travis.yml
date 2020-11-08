@@ -1,19 +1,16 @@
+--- 
 after_success: 
-  - "test $TRAVIS_PULL_REQUEST = false && git push"
-branches: 
-  only: 
-    - master
-    - /^deploy-.*$/
+  - "npm run coveralls"
 env: 
   - PORT=4000
-  - MONGO_URI=mongodb+srv://guevara:Guev@r@20@cluster0.hdcoi.mongodb.net/mymybrandtest?retryWrites=true&w=majority
 language: node_js
 node_js: 
-  - "12.19.0"
   - stable
+notifications: 
+  email: false
 script: 
+  - "npm ci"
   - "npm run test"
-  - "npm run coveralls"
-  - "npm run cover"
+  - "npm run coverage"
 services: 
   - mongodb
