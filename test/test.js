@@ -9,12 +9,11 @@ chai.use(chaiHttp);
  describe('CRUD operations',()=>{
     describe('create ',()=>{
         it("should create an article ",(done)=>{
-            const article={"title":"folll","description":"Run goll test"}
+            const article={"title":"fol","description":"Run gol test"}
             chai.request(server)
             .post("/articles")
             .send(article)
             .end((err,response)=>{
-                console.log(response.result)
                 response.should.have.status(201);
                  done();
             })
@@ -104,8 +103,8 @@ chai.use(chaiHttp);
          describe('delete',()=>{
         it("should delete an article ",async()=>{
             const  article= await Post.create({
-                title:"test",
-                description:"test"
+                title:"testt",
+                description:"testt"
             })
             await article.save();
             chai.request(server)
@@ -129,9 +128,9 @@ chai.use(chaiHttp);
         })     
 
          })
-       
-        
-       
+         afterEach(async () => {
+            await Post.deleteMany({});
+          });
         
  })
  
